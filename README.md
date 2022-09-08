@@ -15,7 +15,10 @@ The UI is mostly a placeholder for interacting with the emoticons. When pressed 
  Set up the DB: https://firebase.google.com/docs/database/web/read-and-write
 
  # Instructions
-    1) Open a terminal on the app directory
-        a) run yarn install
-    2) Yarn start runs the app
+    1) Open a terminal on the app directory.
+        a) run yarn install.
+    2) Rename the sampleServiceKey.json file serviceAccountKey.json.
+        a) enter your project details.
+        b) in constants enter your project id where prompted.
+    3) Yarn start runs the app. The app will be served to your device from Expo.
 
