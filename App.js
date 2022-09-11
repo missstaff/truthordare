@@ -7,7 +7,7 @@ import GameAvatars from "./components/GameAvatars";
 import Title from "./components/Title";
 
 import styles from "./styles/styles";
-import { data } from "./data/data"
+import { data } from "./data/data";
 
 
 

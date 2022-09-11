@@ -1,5 +1,5 @@
 /**
- * Switch statement to get the correct emoji name to write to the db.
+ * Switch statement/ helper function to get the correct emoji name to write to the db ~ keeps component code clutter free..
  * @param {*} props 
  * @returns {string} emoji
  */

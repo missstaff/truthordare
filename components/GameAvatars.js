@@ -5,7 +5,7 @@ import styles from "../styles/styles";
 
 
 /**
- * mostly a placeholder to set up emoji chat animations 
+ * mostly a ui placeholder to set up emoji chat animations 
  * @param {*} props 
  * @returns *skeleton of* a viewers game view
  */
