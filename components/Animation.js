@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import { Animated, Image, TouchableOpacity } from "react-native";
 
 import styles from "../styles/styles";
@@ -11,10 +11,28 @@ const Animation = (props) => {
     return writeData;
   };
 
+  const animation = new Animated.Value(0);
+
+  const animationStyles = {
+    transform: [
+      {
+        translateY: animation,
+      }
+    ]
+  }
+
+  const startAnimation = () => {
+    Animated.timing(animation, {
+      useNativeDriver: true,
+      toValue: -300,
+      duration: 1500,
+    }).start();
+  }
+
   return (
-    <TouchableOpacity onPress={write}>
+    <TouchableOpacity style={animationStyles} onPress={() => [write(), startAnimation()]}>
       <Animated.View>
-        <Image style={styles.emoji} source={props.emojiUri} />
+        <Image style={[styles.emoji]} source={props.emojiUri} />
       </Animated.View>
     </TouchableOpacity>
   )
