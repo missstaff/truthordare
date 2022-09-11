@@ -1,12 +1,13 @@
 import React from 'react';
 import { child, getDatabase, onValue, ref, set, update } from "firebase/database";
 import {
+  Animated,
   Image,
   StyleSheet,
   TouchableOpacity
 } from 'react-native';
 
-
+import Animation from './Animation';
 import app from "../config/firebaseConfig";
 import {DBURL} from "../config/constants"
 import GetEmoji from "./GetEmoji"
@@ -42,19 +43,17 @@ async function writeData(emoji, gameId, userId) {
     })
     
     emojiArr.unshift({time: time, emoji: emoji});
-    return update(childRef, {
+    return await update(childRef, {
       emojis: emojiArr,
     })
   }
   if(!data){
-    return set(childRef, {
+    return await set(childRef, {
       emojis: [{time: time, emoji: emoji}],
     });
   }
   
 }
-
-
 
 /**
  * 
@@ -67,8 +66,8 @@ const Emoji = (props) => {
   let emoji = GetEmoji(propsEmoji)
 
   return (
-    <TouchableOpacity onPress={() => writeData(emoji, props.gameId, props.userId)}>
-      <Image style={styles.emoji} source={props.emoji} />
+    <TouchableOpacity onPress={() => [writeData(emoji, props.gameId, props.userId)]}>
+      <Animation style={styles.emoji} emoji={propsEmoji}/>
     </TouchableOpacity>
   );
 };
@@ -76,6 +75,7 @@ const Emoji = (props) => {
 export default Emoji;
 
 const styles = StyleSheet.create({
+  animate: {},
   emoji: {
     height: 25,
     marginRight: 15,
