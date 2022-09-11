@@ -1,10 +1,7 @@
-import React from 'react';
+import React from "react";
 import { child, getDatabase, onValue, ref, set, update } from "firebase/database";
 import {
-  Animated,
-  Image,
   StyleSheet,
-  TouchableOpacity
 } from 'react-native';
 
 import Animation from './Animation';
@@ -56,26 +53,23 @@ async function writeData(emoji, gameId, userId) {
 }
 
 /**
- * 
+ * Emoji Component
  * @param {*} props 
  * @returns Emoticon
  */
 const Emoji = (props) => {
 
-  const propsEmoji = props.emoji
-  let emoji = GetEmoji(propsEmoji)
+  const emojiUri = props.emoji;
+  const emoji = GetEmoji(emojiUri);
 
   return (
-    <TouchableOpacity onPress={() => [writeData(emoji, props.gameId, props.userId)]}>
-      <Animation style={styles.emoji} emoji={propsEmoji}/>
-    </TouchableOpacity>
+    <Animation style={styles.emoji} emoji={emoji} emojiUri={emojiUri} gameId={props.gameId} userId={props.userId} onPress={writeData}/>
   );
 };
 
 export default Emoji;
 
 const styles = StyleSheet.create({
-  animate: {},
   emoji: {
     height: 25,
     marginRight: 15,
