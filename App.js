@@ -13,11 +13,13 @@ import GameAvatars from "./components/GameAvatars";
 import Icon from './components/Icon';
 
 import { data } from "./data/data"
+import { useState } from "react";
 
 
 export default function App() {
 
   const { colors } = useTheme();
+  const [isAnimated, setAnimated] = useState();
   const players = data.gameShowUser;
   const gameId = data.gameId;
   const currentUserId = "zoOb78tuygh"

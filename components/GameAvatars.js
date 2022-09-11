@@ -13,7 +13,6 @@ import {
  */
 const GameAvatars = (props) => {
 
-    // very generic code ?? address mobility of player isActive status? (only if needed)
 
     const host = props.players.filter(object => {
         return object.isHost === true;

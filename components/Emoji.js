@@ -9,6 +9,7 @@ import {
 
 import app from "../config/firebaseConfig";
 import {DBURL} from "../config/constants"
+import GetEmoji from "./GetEmoji"
 
 
 /**
@@ -20,7 +21,7 @@ import {DBURL} from "../config/constants"
  */
 async function writeData(emoji, gameId, userId) {
 
-  const now = Date.now();
+  const time = Date.now();
   const db = getDatabase(app, DBURL);
   const dbRef = ref(db, `live_chat/`);
   const childRef = child(dbRef, `${gameId}/${userId}`);
@@ -40,14 +41,14 @@ async function writeData(emoji, gameId, userId) {
       })
     })
     
-    emojiArr.unshift({time: now, emoji: emoji});
+    emojiArr.unshift({time: time, emoji: emoji});
     return update(childRef, {
       emojis: emojiArr,
     })
   }
   if(!data){
     return set(childRef, {
-      emojis: [{now: now, emoji: emoji}],
+      emojis: [{time: time, emoji: emoji}],
     });
   }
   
@@ -61,27 +62,9 @@ async function writeData(emoji, gameId, userId) {
  * @returns Emoticon
  */
 const Emoji = (props) => {
-  let emoji = "";
-  switch (props.emoji) {
-    case (19):
-      emoji = "Surprised Face with Open Mouth"
-      break;
-    case (20):
-      emoji = "Clapping Hands"
-      break;
-    case (21):
-      emoji = "Rolling on the Floor Laughing"
-      break;
-    case (22):
-      emoji = "Purple Heart"
-      break;
-    case (23):
-      emoji = "Fire"
-      break;
-    case (24):
-      emoji = " Smiling Face with Heart-Eyes"
-      break;
-  }
+
+  const propsEmoji = props.emoji
+  let emoji = GetEmoji(propsEmoji)
 
   return (
     <TouchableOpacity onPress={() => writeData(emoji, props.gameId, props.userId)}>
