@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Animated, Image, TouchableOpacity } from "react-native";
 
 import styles from "../styles/styles";
@@ -11,7 +11,7 @@ const Animation = (props) => {
     return writeData;
   };
 
-  const animation = new Animated.Value(0);
+  const [animation, setAnimation] = useState(new Animated.Value(0));
 
   const animationStyles = {
     transform: [
@@ -26,7 +26,9 @@ const Animation = (props) => {
       useNativeDriver: true,
       toValue: -300,
       duration: 1500,
-    }).start();
+    }).start(() => {
+      setAnimation(new Animated.Value(0))
+    });
   }
 
   return (
