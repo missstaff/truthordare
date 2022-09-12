@@ -1,6 +1,6 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import {ScrollView} from "react-native";
-
+import {Animated} from "react-native";
 
 import Emojis from "./components/Emojis";
 import GameAvatars from "./components/GameAvatars";
@@ -15,7 +15,7 @@ export default function App() {
 
   const players = data.gameShowUser;
   const gameId = data.gameId;
-  const currentUserId = "zoOb78tuygh"
+  const currentUserId = "zoOb78tuygh";
 
   return (
     <SafeAreaView edges={['top']} style={styles.safe}>

@@ -13,12 +13,12 @@ const Emojis = (props) => {
   
   return (
     <View style={styles.EmojisContainer}>
-      <Emoji emoji={require("../assets/oh.png")} gameId={props.gameId} userId={props.userId} />
-      <Emoji emoji={require("../assets/clap.png")} gameId={props.gameId} userId={props.userId} />
-      <Emoji emoji={require("../assets/lol.png")} gameId={props.gameId} userId={props.userId} />
-      <Emoji emoji={require("../assets/love.png")} gameId={props.gameId} userId={props.userId} />
-      <Emoji emoji={require("../assets/fire.png")} gameId={props.gameId} userId={props.userId} />
-      <Emoji emoji={require("../assets/adore.png")} gameId={props.gameId} userId={props.userId} />
+      <Emoji name={"open_mouth"} emoji={require("../assets/open_mouth.png")} gameId={props.gameId} userId={props.userId} />
+      <Emoji name={"clap"} emoji={require("../assets/clap.png")} gameId={props.gameId} userId={props.userId} />
+      <Emoji name={"joy"} emoji={require("../assets/joy.png")} gameId={props.gameId} userId={props.userId} />
+      <Emoji name={"purple_heart"} emoji={require("../assets/purple_heart.png")} gameId={props.gameId} userId={props.userId} />
+      <Emoji name={"fire"} emoji={require("../assets/fire.png")} gameId={props.gameId} userId={props.userId} />
+      <Emoji name={"heart_eyes"} emoji={require("../assets/heart_eyes.png")} gameId={props.gameId} userId={props.userId} />
     </View>
   );
 };
