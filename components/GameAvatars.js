@@ -1,19 +1,16 @@
-import React from 'react';
-import {
-    Image, 
-    StyleSheet, 
-    View 
-} from 'react-native';
+import React from "react";
+import { Image, View } from "react-native";
+
+import styles from "../styles/styles";
 
 
 /**
+ * mostly a ui placeholder to set up emoji chat animations 
  * @param {*} props 
  * @returns *skeleton of* a viewers game view
- * mostly a placeholder to set up emoji chat animations 
  */
 const GameAvatars = (props) => {
 
-    // very generic code ?? address mobility of player isActive status? (only if needed)
 
     const host = props.players.filter(object => {
         return object.isHost === true;
@@ -46,7 +43,7 @@ const GameAvatars = (props) => {
 
 
     return (
-        <View style={styles.container}>
+        <View style={styles.avatarContainer}>
             <Row>
                 {topRow.map((player, i) => {
                     return (
@@ -76,46 +73,3 @@ const GameAvatars = (props) => {
 };
 
 export default GameAvatars;
-
-const styles = StyleSheet.create({
-    active: { 
-        borderRadius: 8, 
-        borderWidth: 1, 
-        height: "100%",
-        width: "100%", 
-    },
-    container: {
-        alignItems: "center",
-        flex: 3, // the number of columns you want to devide the screen into
-        justifyContent: "center",
-        marginHorizontal: "auto",
-        width: 375,
-    },
-    host: { 
-        alignSelf: "flex-end", 
-        borderRadius: 8, 
-        borderWidth: 1, 
-        height: "40%", 
-        position: "absolute", 
-        top: 150, 
-        width: "40%",
-    },
-    images: {
-        borderRadius: 8,
-        borderWidth: 1,
-        height: "100%",
-        width: "100%",
-    },
-    row: {
-        flexDirection: "row",
-    },
-    "1img": {
-        flex: 1,
-        height: 100,
-    },
-    "3img": {
-        borderWidth: 1,
-        flex: 3,
-        height: 250,
-    },
-});

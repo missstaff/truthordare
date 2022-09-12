@@ -1,14 +1,10 @@
-import React from 'react';
+import React from "react";
 import { child, getDatabase, onValue, ref, set, update } from "firebase/database";
-import {
-  Image,
-  StyleSheet,
-  TouchableOpacity
-} from 'react-native';
 
-
+import Animation from "./Animation";
 import app from "../config/firebaseConfig";
-import {DBURL} from "../config/constants"
+import { DBURL } from "../config/constants";
+import GetEmoji from "../helpers/GetEmoji";
 
 
 /**
@@ -20,7 +16,7 @@ import {DBURL} from "../config/constants"
  */
 async function writeData(emoji, gameId, userId) {
 
-  const now = Date.now();
+  const time = Date.now();
   const db = getDatabase(app, DBURL);
   const dbRef = ref(db, `live_chat/`);
   const childRef = child(dbRef, `${gameId}/${userId}`);
@@ -37,67 +33,34 @@ async function writeData(emoji, gameId, userId) {
     Object.values(data).forEach((v) => {
       Object.values(v).forEach((x) => {
         emojiArr = x.emojis;
-      })
-    })
+      });
+    });
     
-    emojiArr.unshift({time: now, emoji: emoji});
-    return update(childRef, {
+    emojiArr.unshift({time: time, emoji: emoji});
+    return await update(childRef, {
       emojis: emojiArr,
-    })
-  }
-  if(!data){
-    return set(childRef, {
-      emojis: [{now: now, emoji: emoji}],
     });
   }
-  
-}
-
-
+  if(!data){
+    return await set(childRef, {
+      emojis: [{time: time, emoji: emoji}],
+    });
+  }
+};
 
 /**
- * 
+ * Emoji Component
  * @param {*} props 
  * @returns Emoticon
  */
 const Emoji = (props) => {
-  let emoji = "";
-  switch (props.emoji) {
-    case (19):
-      emoji = "Surprised Face with Open Mouth"
-      break;
-    case (20):
-      emoji = "Clapping Hands"
-      break;
-    case (21):
-      emoji = "Rolling on the Floor Laughing"
-      break;
-    case (22):
-      emoji = "Purple Heart"
-      break;
-    case (23):
-      emoji = "Fire"
-      break;
-    case (24):
-      emoji = " Smiling Face with Heart-Eyes"
-      break;
-  }
+
+  const emojiUri = props.emoji;
+  const emoji = GetEmoji(emojiUri);
 
   return (
-    <TouchableOpacity onPress={() => writeData(emoji, props.gameId, props.userId)}>
-      <Image style={styles.emoji} source={props.emoji} />
-    </TouchableOpacity>
+    <Animation emoji={emoji} emojiUri={emojiUri} gameId={props.gameId} userId={props.userId} onPress={writeData}/>
   );
 };
 
 export default Emoji;
-
-const styles = StyleSheet.create({
-  emoji: {
-    height: 25,
-    marginRight: 15,
-    marginLeft: 15,
-    padding: 15,
-    width: 25,
-  },
-});
