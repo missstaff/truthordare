@@ -6,11 +6,6 @@ import styles from "../styles/styles";
 
 const Animation = (props) => {
 
-  const write = async () => {
-    const writeData = await props.onPress(props.emoji, props.gameId, props.userId);
-    return writeData;
-  };
-
   const [animation, setAnimation] = useState(new Animated.Value(0));
   const [fadeAnim, setFadeAnim] = useState(useRef(new Animated.Value(1)).current); 
 
@@ -41,7 +36,7 @@ const Animation = (props) => {
   };
 
   return (
-    <TouchableOpacity style={animationStyles} onPress={() => [write(), startAnimation()]}>
+    <TouchableOpacity style={animationStyles} onPress={() => [startAnimation()]}>
       <Animated.View style={{opacity: fadeAnim}}>
         <Image style={[styles.emoji]} source={props.emojiUri} />
       </Animated.View>
