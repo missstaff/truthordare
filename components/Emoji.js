@@ -1,7 +1,7 @@
 import React from "react";
 import { child, getDatabase, onValue, ref, set, update } from "firebase/database";
 
-import Animation from './Animation';
+import Animation from "./Animation";
 import app from "../config/firebaseConfig";
 import { DBURL } from "../config/constants";
 import GetEmoji from "../helpers/GetEmoji";

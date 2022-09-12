@@ -19,8 +19,8 @@ const Animation = (props) => {
     transform: [
       {
         translateY: animation,
-      }
-    ]
+      },
+    ],
   };
 
   const startAnimation = () => {
@@ -37,8 +37,8 @@ const Animation = (props) => {
         setAnimation(new Animated.Value(0));
         setFadeAnim(new Animated.Value(1));
       });
-    })
-  }
+    });
+  };
 
   return (
     <TouchableOpacity style={animationStyles} onPress={() => [write(), startAnimation()]}>
@@ -46,7 +46,7 @@ const Animation = (props) => {
         <Image style={[styles.emoji]} source={props.emojiUri} />
       </Animated.View>
     </TouchableOpacity>
-  )
+  );
 };
 
 export default Animation;
