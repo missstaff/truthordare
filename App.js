@@ -2,7 +2,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import {ScrollView} from "react-native";
 import {Animated} from "react-native";
 
-import Emojis from "./components/Emojis";
+import Emojis from "./components/EmojisBar";
 import GameAvatars from "./components/GameAvatars";
 import Title from "./components/Title";
 

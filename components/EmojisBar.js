@@ -9,7 +9,7 @@ import styles from "../styles/styles";
  * UI View of emoticons for interacting with game host
  * @returns Emojis View
  */
-const Emojis = (props) => {
+const EmojisBar = (props) => {
   
   return (
     <View style={styles.EmojisContainer}>
@@ -23,4 +23,4 @@ const Emojis = (props) => {
   );
 };
 
-export default Emojis;
+export default EmojisBar;
