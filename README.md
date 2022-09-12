@@ -10,9 +10,9 @@ The UI is mostly a placeholder for interacting with the emoticons. When pressed 
 - Expo Go app
 
 
- Install Expo and Expo Go: https://docs.expo.dev/get-started/installation/ 
- Get started with Firebase: https://firebase.google.com/docs/firestore/quickstart 
- Set up the DB: https://firebase.google.com/docs/database/web/read-and-write
+ Install Expo and Expo Go: https://docs.expo.dev/get-started/installation/ <br>
+ Get started with Firebase: https://firebase.google.com/docs/firestore/quickstart <br>
+ Set up the DB: https://firebase.google.com/docs/database/web/read-and-write <br>
 
  # Instructions
     1) Open a terminal on the app directory.
