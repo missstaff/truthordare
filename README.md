@@ -1,5 +1,5 @@
 # truthordare
-The UI is mostly a placeholder for interacting with the emoticons. When pressed the selected emotion floats up the screen and the chat activity is entered into the firestore realtime database.
+The UI is mostly a placeholder for interacting with the emoticons. When pressed the selected emoticon floats up the screen and the chat activity is entered into the firestore realtime database.
 
 ### requirements
 - Firebase account
