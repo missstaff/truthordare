@@ -32,7 +32,7 @@ const Animation = (props) => {
       Animated.timing(fadeAnim, {
         useNativeDriver: true,
         toValue: 0,
-        duration: 1000
+        duration: 500
       }).start(() => {
         setAnimation(new Animated.Value(0));
         setFadeAnim(new Animated.Value(1));
