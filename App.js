@@ -1,18 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Animated, Image, ScrollView } from "react-native";
+import { Animated, ScrollView } from "react-native";
 
-import Emojis from "./components/Emojis";
+import AnimatedEmoji from "./components/AnimatedEmoji";
 import EmojisBar from "./components/EmojisBar";
 import GameAvatars from "./components/GameAvatars";
 import Title from "./components/Title";
 
 import styles from "./styles/styles";
 import { data } from "./data/data";
-import AnimatedEmoji from "./components/AnimatedEmoji";
-
-
-
 
 
 export default function App() {
@@ -24,12 +20,12 @@ export default function App() {
   const [startAnim, setStartAnim] = useState(false);
   const [animation, setAnimation] = useState(new Animated.Value(0));
   const [fadeAnim, setFadeAnim] = useState(useRef(new Animated.Value(1)).current);
-  const [animatedEmoji, setAnimatedEmoji] = useState("");
+  const [animatedEmoji, setAnimatedEmoji] = useState(null);
 
   useEffect(() => {
-   if(startAnim) startAnimation();
-    console.log(animatedEmoji);
-  }, [startAnim])
+   if(startAnim === true) startAnimation();
+  }, [startAnim]);
+
 
   const animationStyles = {
     transform: [
@@ -53,11 +49,11 @@ export default function App() {
         setAnimation(new Animated.Value(0));
         setFadeAnim(new Animated.Value(1));
         setStartAnim(false)
-        
       });
     });
   };
 
+  
   return (
     <SafeAreaView edges={['top']} style={styles.safe}>
       <ScrollView style={styles.scroll}>
