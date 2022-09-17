@@ -3,14 +3,6 @@ import { View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 
-/**
- * A Material Icons component for easy use, default syles are over rideable
- * @param {string} name
- * @param {number} size
- * @param {string} iconColor
- * @param {function} onPress
- * @exports Icon 
- */
 function Icon({ name, size = 40, color = "white", onPress }) {
   return (
     <View

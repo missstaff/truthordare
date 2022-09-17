@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image, View } from "react-native";
 
 import styles from "../styles/styles";
@@ -20,10 +20,10 @@ const GameAvatars = (props) => {
         return object.isActive === true;
     });
 
-    const players = props.players.filter(object => {
+    let players = props.players.filter(object => {
         return object.isHost === false
     });
-    
+
 
     const topRow = players.splice(0, 3);
     const bottomRow = players;
@@ -72,4 +72,4 @@ const GameAvatars = (props) => {
     );
 };
 
-export default GameAvatars;
+export default React.memo(GameAvatars);
