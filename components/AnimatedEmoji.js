@@ -1,37 +1,56 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Image, View, Easing, } from "react-native";
 
 import styles from "../styles/styles";
 
-const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+
 
 const AnimatedEmoji = (props) => {
 
-    console.log("PROPS", props.activeAnimatedEmoji)
-  const source = props.source;
-  const [ yOffset, setYOffset ] = useState(0);
-  const [ opacity, setOpacity ] = useState(20);
-  const [startTime] = useState(Date.now());
+    const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
-   
-  useEffect(() => {
-   
-    let id = setInterval(() => {
-        var elapsedMs = Date.now() - startTime;
-        var t = clamp(elapsedMs / 5000, 0, 1);
-        setYOffset(Easing.ease(t) * -800);
-        setOpacity(1.0 - Easing.circle(t)); 
-    }, 500);
-   
-    return () => {
+    const source = props.source;
+    const [yOffset, setYOffset] = useState(0);
+    const [opacity, setOpacity] = useState(20);
+    const [startTime] = useState(Date.now());
+
+
+
+
+    useEffect(() => {
+
+        let id = props.activeAnimatedEmoji.forEach(() => {
+            setInterval(() => {
+                let elapsedMs = Date.now() - startTime;
+                let t = clamp(elapsedMs / 2500, 0, 1);
+                setYOffset(Easing.ease(t) * -300);
+                setOpacity(1.0 - Easing.circle(t));
+     
+            }, 10);
+        })
+       
         
-      console.log("KILL", id);
-      clearInterval(id);
-    }; 
-  }, [startTime]);
+        return () => {
 
-  
+            console.log("KILL", id);
+            clearInterval(id);
+            props.setActiveAnimatedEmoji((state) => [...state])
 
+        };
+        
+    }, [startTime]);
+
+    // props.setActiveAnimatedEmoji((emojis) => emojis.filter((_, index) => index !== 0));
+    
+      const handleRemoveItem = () => {
+        
+        const temp = [...props.activeAnimatedEmoji];
+
+        temp.splice(0, 1);
+
+        props.setActiveAnimatedEmoji(temp);
+    }
+   
     return (
         <View style={[
             {
@@ -43,10 +62,10 @@ const AnimatedEmoji = (props) => {
                 opacity: opacity,
                 transform: [
                     {
-                    translateY: yOffset
-                    }
-                ]
-            }
+                        translateY: yOffset
+                    },
+                ],
+            },
         ]}>
             <Image style={styles.emoji} source={source} />
         </View>

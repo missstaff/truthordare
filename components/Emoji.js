@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Image, TouchableOpacity } from "react-native";
 
 import styles from "../styles/styles";
@@ -22,4 +22,4 @@ const Emoji = (props) => {
   );
 };
 
-export default React.memo(Emoji);
+export default Emoji;
