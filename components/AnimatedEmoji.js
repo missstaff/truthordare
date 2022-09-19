@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Image, View, Easing, } from "react-native";
+import { Dimensions, Image, View, Easing, } from "react-native";
 
 import styles from "../styles/styles";
 
 
 
 const AnimatedEmoji = (props) => {
-
+    console.log("props", props.activeAnimatedEmoji)
     const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
-
+    const windowWidth = Dimensions.get('window').width;
     const source = props.source;
     const [yOffset, setYOffset] = useState(0);
     const [opacity, setOpacity] = useState(20);
@@ -34,12 +34,16 @@ const AnimatedEmoji = (props) => {
 
             console.log("KILL", id);
             clearInterval(id);
-            props.setActiveAnimatedEmoji((state) => [...state])
-
         };
         
     }, [startTime]);
 
+    // useEffect(() => {
+    //     if(yOffset < -299){
+    //         handleRemoveItem()
+    //     }
+    // }, [yOffset])
+    // console.log("YO", yOffset)
     // props.setActiveAnimatedEmoji((emojis) => emojis.filter((_, index) => index !== 0));
     
       const handleRemoveItem = () => {
@@ -54,16 +58,16 @@ const AnimatedEmoji = (props) => {
     return (
         <View style={[
             {
-                alignItems: "center",
-                justifyContent: "center",
                 bottom: 80,
-            },
-            {
+                position: "absolute",
                 opacity: opacity,
                 transform: [
                     {
                         translateY: yOffset
                     },
+                    {
+                        translateX: windowWidth * .40
+                    }
                 ],
             },
         ]}>
