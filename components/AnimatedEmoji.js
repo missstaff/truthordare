@@ -11,18 +11,18 @@ const AnimatedEmoji = (props) => {
     const windowWidth = Dimensions.get('window').width;
     const source = props.source;
     const [yOffset, setYOffset] = useState(0);
+    const [xOffset, setXOffset] = useState(0)
     const [opacity, setOpacity] = useState(20);
     const [startTime] = useState(Date.now());
 
 
-
-
     useEffect(() => {
-
+        setXOffset(Math.floor(Math.random() * 300) + 1);
         let id = props.activeAnimatedEmoji.forEach(() => {
             setInterval(() => {
                 let elapsedMs = Date.now() - startTime;
                 let t = clamp(elapsedMs / 2500, 0, 1);
+                
                 setYOffset(Easing.ease(t) * -300);
                 setOpacity(1.0 - Easing.circle(t));
      
@@ -66,7 +66,7 @@ const AnimatedEmoji = (props) => {
                         translateY: yOffset
                     },
                     {
-                        translateX: windowWidth * .40
+                        translateX: xOffset
                     }
                 ],
             },
