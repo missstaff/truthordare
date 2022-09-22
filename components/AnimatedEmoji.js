@@ -1,69 +1,58 @@
-import React, { useEffect, useState } from "react";
-import { Dimensions, Image, View, Easing, } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { Image, View, Easing, } from "react-native";
 
 import styles from "../styles/styles";
 
 
 
 const AnimatedEmoji = (props) => {
-    console.log("props", props.activeAnimatedEmoji)
+
     const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
-    const windowWidth = Dimensions.get('window').width;
+
     const source = props.source;
     const [yOffset, setYOffset] = useState(0);
     const [xOffset, setXOffset] = useState(0)
     const [opacity, setOpacity] = useState(20);
     const [startTime] = useState(Date.now());
-
+    const [isDone, setIsDone] = useState(false);
 
     useEffect(() => {
-        setXOffset(Math.floor(Math.random() * 300) + 1);
-        let id = props.activeAnimatedEmoji.forEach(() => {
-            setInterval(() => {
-                let elapsedMs = Date.now() - startTime;
-                let t = clamp(elapsedMs / 2500, 0, 1);
-                
-                setYOffset(Easing.ease(t) * -300);
-                setOpacity(1.0 - Easing.circle(t));
-     
-            }, 10);
-        })
        
+        setXOffset(Math.floor(Math.random() * 300) + 1);
         
-        return () => {
+        let id = setInterval(() => {
 
+            let elapsedMs = Date.now() - startTime;
+            let t = clamp(elapsedMs / 1500, 0, 1);
+
+            setYOffset(Easing.circle(t) * -300);
+            setOpacity(1.0 - Easing.circle(1 - Math.sqrt(1 - Math.pow(t, 2))));
+
+            if(t == 1) {
+                clearInterval(id);
+                setIsDone(true);
+            }
+
+        }, 10);   
+    
+       
+        return () => {
             console.log("KILL", id);
             clearInterval(id);
         };
-        
+
     }, [startTime]);
 
-    // useEffect(() => {
-    //     if(yOffset < -299){
-    //         handleRemoveItem()
-    //     }
-    // }, [yOffset])
-    // console.log("YO", yOffset)
-    // props.setActiveAnimatedEmoji((emojis) => emojis.filter((_, index) => index !== 0));
-    
-      const handleRemoveItem = () => {
-        
-        const temp = [...props.activeAnimatedEmoji];
+    if(isDone) return <></>;
 
-        temp.splice(0, 1);
-
-        props.setActiveAnimatedEmoji(temp);
-    }
-   
     return (
-        <View style={[
-            {
+        <View style={[{
                 bottom: 80,
                 position: "absolute",
                 opacity: opacity,
                 transform: [
                     {
-                        translateY: yOffset
+                        translateY: yOffset,
                     },
                     {
                         translateX: xOffset
