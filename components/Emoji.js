@@ -1,66 +1,38 @@
 import React from "react";
-import { child, getDatabase, onValue, ref, set, update } from "firebase/database";
+import { Image, TouchableOpacity } from "react-native";
 
-import Animation from "./Animation";
-import app from "../config/firebaseConfig";
-import { DBURL } from "../config/constants";
-import GetEmoji from "../helpers/GetEmoji";
+import styles from "../styles/styles";
+import writeData from "../helpers/WriteData";
 
-
-/**
- * Writes to real time database
- * @param {*} emoji 
- * @param {*} gameId 
- * @param {*} name 
- * @param {*} userId 
- */
-async function writeData(emoji, gameId, userId) {
-
-  const time = Date.now();
-  const db = getDatabase(app, DBURL);
-  const dbRef = ref(db, `live_chat/`);
-  const childRef = child(dbRef, `${gameId}/${userId}`);
-
-
-  let data;
-  onValue(dbRef, (snapshot) => {
-    data = snapshot.val();
-  });
-  
-
-  let emojiArr;
-  if(data){
-    Object.values(data).forEach((v) => {
-      Object.values(v).forEach((x) => {
-        emojiArr = x.emojis;
-      });
-    });
-    
-    emojiArr.unshift({time: time, emoji: emoji});
-    return await update(childRef, {
-      emojis: emojiArr,
-    });
-  }
-  if(!data){
-    return await set(childRef, {
-      emojis: [{time: time, emoji: emoji}],
-    });
-  }
-};
-
-/**
- * Emoji Component
- * @param {*} props 
- * @returns Emoticon
- */
 const Emoji = (props) => {
 
   const emojiUri = props.emoji;
-  const emoji = GetEmoji(emojiUri);
+  const emoji = props.name;
+
+
+  const pressed = () => {
+
+    const e = {
+      id: Math.random(),
+      emoji: emojiUri
+    }
+
+    props.setActiveAnimatedEmoji(state => {
+      console.log("Running state update!");
+      let trimmed = state.slice(-5);
+      trimmed.push(e);
+      return trimmed;
+    });
+
+    writeData(emoji, props.gameId, props.userId);
+  };
 
   return (
-    <Animation emoji={emoji} emojiUri={emojiUri} gameId={props.gameId} userId={props.userId} onPress={writeData}/>
+    <TouchableOpacity onPress={() => pressed()}>
+      <Image style={styles.emoji} source={emojiUri} />
+    </TouchableOpacity>
   );
 };
+
 
 export default Emoji;
